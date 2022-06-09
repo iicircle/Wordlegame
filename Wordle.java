@@ -151,9 +151,6 @@ public int score() {
   System.out.println("Latest Score: " + scorechart.get(name));
   return 1;
 }
-  public String toString () {
-    return "name = " + name + "score = " + scorechart.get(name);
-  }
 }
 
  
