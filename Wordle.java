@@ -23,15 +23,9 @@ int turnsnum; (number of turns that the player has/ 6 turns)
 
 import java.util.HashMap;
 import java.util.Scanner;
-import java.io.Serializable;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
 
-public class Wordle implements Serializable{
+public class Wordle{
   public String input;
   public String wordguess;
   public String name;
@@ -39,8 +33,15 @@ public class Wordle implements Serializable{
   public String answer; 
   public String pattern = "";
   public static Scanner scan = new Scanner (System.in);
- public HashMap<String, Integer> scorechart = new HashMap<String, Integer>();
+ public HashMap<String, Integer> scorechart;
 
+  public Wordle () {
+    State s = State.restore();
+    if (s == null)
+      scorechart = new HashMap<String, Integer>();
+    else
+      scorechart = s.scoreChart;
+  }
   // this begins the game and gives the person the choice to play (calling the guess class) or see their score (calling the score class)
   public void begin() {
     System.out.println("Hello! Welcome to Wordle Light! In this game, you try to guess a word and the program gives you clues to help you guess the word. The way you try to guess the word is by inputing 5 letter words and the program will give you clues based on your input in order to help you guess the word.");
@@ -59,6 +60,9 @@ System.out.println("Hi " + name + "!");
       score();
       break;
         case "q":
+          State state = new State();
+          state.scoreChart = scorechart;
+          state.save();
           return;
         default:
           System.out.println("Please input a valid response.");

@@ -4,26 +4,23 @@ import java.io.ObjectOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 
 // This is an example of how to save and restore
 // state to a file via serialization
 public class State implements Serializable {
   public String name;
-  public int[] numbers;
+  public HashMap<String, Integer> scoreChart;
+  private static final String fileName = "scoreChart.ser";
 
   public String toString () {
-    return "name = " + name;
+    return scoreChart.toString();
   }
 
   // Save non-transient state to a local file
   // If "name" is "marc", then the local file we'll save the
   // state to will be called "marcState.ser"
   public boolean save () {
-    if (name == null)
-      return false;
-
-    String fileName = name + "State.ser";
-    
     try {
       FileOutputStream fos = new FileOutputStream(fileName);
       ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -39,9 +36,7 @@ public class State implements Serializable {
 
   // Returns a State class from serialized state stored in the
   // file name + "State.ser", or null if unable to deserialize 
-  public static State restore (String name) {
-    String fileName = name + "State.ser";
-    
+  public static State restore () {
     try {
 		  FileInputStream fis = new FileInputStream(fileName);
       ObjectInputStream ois = new ObjectInputStream(fis);
