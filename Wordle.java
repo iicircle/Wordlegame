@@ -31,15 +31,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 
-public class Wordle {
-  private String input;
-  private String wordguess;
-  private String name;
-  private static String[] words = {"above", "tesla", "lucid", "speed", "apple", "spice","among", "piano", "dough", "melon"};
-  private String answer; 
-  private String pattern = "";
-  private static Scanner scan = new Scanner (System.in);
- private HashMap<String, Integer> scorechart = new HashMap<String, Integer>();
+public class Wordle implements Serializable{
+  public String input;
+  public String wordguess;
+  public String name;
+  public static String[] words = {"above", "tesla", "lucid", "speed", "apple", "spice","among", "piano", "dough", "melon"};
+  public String answer; 
+  public String pattern = "";
+  public static Scanner scan = new Scanner (System.in);
+ public HashMap<String, Integer> scorechart = new HashMap<String, Integer>();
 
   // this begins the game and gives the person the choice to play (calling the guess class) or see their score (calling the score class)
   public void begin() {
@@ -151,6 +151,9 @@ public int score() {
   System.out.println("Latest Score: " + scorechart.get(name));
   return 1;
 }
+  public String toString () {
+    return "name = " + name + "score = " + scorechart.get(name);
+  }
 }
 
  
