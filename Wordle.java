@@ -32,7 +32,6 @@ public class Wordle{
   public static String[] words = {"above", "tesla", "lucid", "speed", "apple", "spice","among", "piano", "dough", "melon"};
   public String answer; 
   public String pattern = "";
-  public int testscore;
   public static Scanner scan = new Scanner (System.in);
  public HashMap<String, Integer> scorechart;
 
@@ -157,5 +156,5 @@ public int score() {
   return 1;
 }
 }
-
+//:)
  
